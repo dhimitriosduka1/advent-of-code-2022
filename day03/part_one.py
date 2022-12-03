@@ -8,7 +8,7 @@ def get_priority(c: str) -> int:
     return ord(c) - (upper_case_ascii_offset if c.isupper() else lower_case_ascii_offset)
 
 
-def get(data: str) -> str:
+def get_common_char(data: str) -> str:
     length = len(data)
     middle = int(length / 2)
 
