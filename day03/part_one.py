@@ -22,6 +22,6 @@ def get_common_char(data: str) -> str:
 score = 0
 
 for line in lines:
-    score += get_priority(get(line))
+    score += get_priority(get_common_char(line))
 
 print(score)
