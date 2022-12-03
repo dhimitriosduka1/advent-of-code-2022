@@ -14,7 +14,6 @@ def update_max():
 for index, line in enumerate(lines):
     line = line.removesuffix("\n")
     if len(line) == 0:
-        update_max()
         current_calories_sum = 0
     else:
         current_calories_sum += int(line)
