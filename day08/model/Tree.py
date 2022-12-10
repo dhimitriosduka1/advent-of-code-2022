@@ -4,4 +4,5 @@ class Tree:
         self.y = y
         self.height = height
         self.visible = True
+        self.scenic_score = 0
 
