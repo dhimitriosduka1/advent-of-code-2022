@@ -1,4 +1,5 @@
 from day09.model import Head
+from day09.model.Point import Point
 from day09.model.Tail import Tail
 
 
@@ -7,21 +8,27 @@ class Instruction:
         self.direction = direction
         self.amount = amount
 
-    def execute(self, head: Head, tail: Tail):
+    def execute(self, nodes: [Point]):
+        head: Head = nodes[0]
+
         for _ in range(self.amount):
             head.move(self.direction)
 
-            x_difference = abs(head.x - tail.x)
-            y_difference = abs(head.y - tail.y)
+            for i in range(1, len(nodes)):
+                prev_node = nodes[i - 1]
+                current_node = nodes[i]
 
-            if x_difference == 2 or y_difference == 2:
-                if head.x != tail.x and head.y != tail.y:
-                    if head.x > tail.x:
-                        tail.move("RU" if head.y > tail.y else "RD")
+                x_difference = abs(prev_node.x - current_node.x)
+                y_difference = abs(prev_node.y - current_node.y)
+
+                if x_difference == 2 or y_difference == 2:
+                    if prev_node.x != current_node.x and prev_node.y != current_node.y:
+                        if prev_node.x > current_node.x:
+                            current_node.move("RU" if prev_node.y > current_node.y else "RD")
+                        else:
+                            current_node.move("LU" if prev_node.y > current_node.y else "LD")
                     else:
-                        tail.move("LU" if head.y > tail.y else "LD")
-                else:
-                    if x_difference:
-                        tail.move("R" if head.x > tail.x else "L")
-                    else:
-                        tail.move("U" if head.y > tail.y else "D")
+                        if x_difference:
+                            current_node.move("R" if prev_node.x > current_node.x else "L")
+                        else:
+                            current_node.move("U" if prev_node.y > current_node.y else "D")
